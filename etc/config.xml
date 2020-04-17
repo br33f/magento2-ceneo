@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+  ~ @copyright Copyright (c) 2019 Aurora Creation Sp. z o.o. (https://auroracreation.com)
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <feedSection>
+            <ceneofeed>
+                <enable>0</enable>
+                <directory>maps</directory>
+                <cron_enable>0</cron_enable>
+                <cron_frequency>*/5 * * * *</cron_frequency>
+                <categories_url>https://developers.ceneo.pl/api/v3/kategorie</categories_url>
+            </ceneofeed>
+        </feedSection>
+    </default>
+</config>

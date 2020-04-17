@@ -1,0 +1,16 @@
+{
+  "name": "ceneo-pl/ceneo-feed",
+  "version": "1.6.5",
+  "type": "magento2-module",
+  "require": {
+    "magento/project-community-edition": "~2.2"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Ceneo\\Feed\\": ""
+    }
+  }
+}

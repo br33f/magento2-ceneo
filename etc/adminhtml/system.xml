@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!--
+  ~ @copyright Copyright (c) 2019 Aurora Creation Sp. z o.o. (https://auroracreation.com)
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="ceneo" translate="label" sortOrder="10">
+            <label>Ceneo</label>
+        </tab>
+        <section id="feedSection" translate="label" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Feed</label>
+            <tab>ceneo</tab>
+            <resource>Ceneo_Feed::orders_configuration</resource>
+            <group id="ceneofeed" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Products feeds</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Product Feeds Module</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="raw_images" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use raw images</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="feedSection/ceneofeed/enable">1</field>
+                    </depends>
+                </field>
+                <field id="directory" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Feeds directory</label>
+                    <comment>In this directory all xml files will be saved. This directory should be free to write.</comment>
+                    <depends>
+                        <field id="feedSection/ceneofeed/enable">1</field>
+                    </depends>
+                </field>
+                <field id="manufacturer_code" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Manufacturer Code Attribute</label>
+                    <source_model>Ceneo\Feed\Ui\Component\Feed\Form\Attributes\Options</source_model>
+                    <depends>
+                        <field id="feedSection/ceneofeed/enable">1</field>
+                    </depends>
+                </field>
+                <field id="manufacturer" translate="label" type="select" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Manufacturer Attribute</label>
+                    <source_model>Ceneo\Feed\Ui\Component\Feed\Form\Attributes\Options</source_model>
+                    <depends>
+                        <field id="feedSection/ceneofeed/enable">1</field>
+                    </depends>
+                </field>
+                <field id="ean" translate="label" type="select" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>EAN Attribute</label>
+                    <source_model>Ceneo\Feed\Ui\Component\Feed\Form\Attributes\Options</source_model>
+                    <depends>
+                        <field id="feedSection/ceneofeed/enable">1</field>
+                    </depends>
+                </field>
+                <field id="categories_url" translate="label" type="text" sortOrder="29" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Ceneo API Url for Categories</label>
+                    <comment>Url to API with XML for categories.</comment>
+                    <depends>
+                        <field id="feedSection/ceneofeed/enable">1</field>
+                    </depends>
+                </field>
+                <field id="cron_enable" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable creation by schedule</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable/Disable cron generation</comment>
+                    <depends>
+                        <field id="feedSection/ceneofeed/enable">1</field>
+                    </depends>
+                </field>
+                <field id="cron_frequency" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cron frequency</label>
+                    <source_model>Ceneo\Feed\Model\Config\Source\CronFrequency</source_model>
+                    <comment>Defines the frequency of running the cron.</comment>
+                    <depends>
+                        <field id="feedSection/ceneofeed/enable">1</field>
+                        <field id="feedSection/ceneofeed/cron_enable">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

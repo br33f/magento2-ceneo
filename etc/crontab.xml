@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!--
+  ~ @copyright Copyright (c) 2019 Aurora Creation Sp. z o.o. (https://auroracreation.com)
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="ceneo_feed_generate" instance="Ceneo\Feed\Cron\FeedGeneration" method="execute">
+            <config_path>feedSection/ceneofeed/cron_frequency</config_path>
+        </job>
+    </group>
+</config>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+  ~ @copyright Copyright (c) 2019 Aurora Creation Sp. z o.o. (https://auroracreation.com)
+  -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="styles"/>
+    <body>
+        <referenceContainer name="content">
+            <uiComponent name="ceneofeed_feed_edit" />
+            <block class="Ceneo\Feed\Block\Adminhtml\BaseUrl" name="ceneofeed_feed_edit_base_url"  />
+        </referenceContainer>
+    </body>
+</page>

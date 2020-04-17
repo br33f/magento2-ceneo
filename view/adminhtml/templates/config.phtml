@@ -1,0 +1,13 @@
+<?php
+/**
+ * @copyright Copyright (c) 2019 Aurora Creation Sp. z o.o. (https://auroracreation.com)
+ */
+/** @var $block \Ceneo\Feed\Block\Adminhtml\BaseUrl */
+?>
+<script type="text/javascript">
+    require([
+        'mage/url'
+    ], function(url) {
+        return url.setBaseUrl('<?= /* @escapeNotVerified */  $block->getAdminBaseUrl();?>');
+    });
+</script>

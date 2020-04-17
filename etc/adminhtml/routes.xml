@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+  ~ @copyright Copyright (c) 2019 Aurora Creation Sp. z o.o. (https://auroracreation.com)
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="admin">
+        <route id="ceneofeed" frontName="ceneofeed">
+            <module name="Ceneo_Feed" />
+        </route>
+    </router>
+</config>

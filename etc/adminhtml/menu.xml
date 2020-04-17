@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!--
+  ~ @copyright Copyright (c) 2019 Aurora Creation Sp. z o.o. (https://auroracreation.com)
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ceneo_Feed::module" title="Ceneo Feeds" module="Ceneo_Feed" sortOrder="100" parent="Magento_Catalog::catalog" resource="Ceneo_Feed::module"/>
+        <add id="Ceneo_Feed::feeds" title="Feed listing" module="Ceneo_Feed" sortOrder="110" parent="Ceneo_Feed::module" action="ceneofeed/feeds/index" resource="Ceneo_Feed::feeds"/>
+        <add id="Ceneo_Feed::mapping" title="Mapping categories" module="Ceneo_Feed" sortOrder="120" parent="Ceneo_Feed::module" action="ceneofeed/mapping/index" resource="Ceneo_Feed::mapping"/>
+    </menu>
+</config>

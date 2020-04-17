@@ -1,0 +1,50 @@
+<?php
+/**
+ * @copyright Copyright (c) 2019 Aurora Creation Sp. z o.o. (https://auroracreation.com)
+ */
+/** @var $block Ceneo\Feed\Block\Adminhtml\Feeds\FeedTemplate */
+$feedData = $block->getFeedData();
+$additionalAttributes = $block->getAdditionalAttributes($feedData);
+?>
+<?= '<?xml version="1.0" encoding="utf-8" ?>' ?>
+<offers version="1">
+    <?php foreach ($block->getFeedProductCollection() as $product) : ?>
+        <o id="<?= $product->getEntityId() ?>" url="<?= $product->getUrl() ?>" price="<?= $product->getFinalPrice() ?>" avail="1" set="0" <?= $block->getProductWeight($product) ?> <?= $block->getBasket($product) ?> <?= $block->getProductStock($product) ?>>
+            <cat>
+                <![CDATA[<?= rtrim($product->getFullCategoryPath('', '', $feedData), '/') ?>]]>
+            </cat>
+            <name>
+                <![CDATA[<?= $product->getName() ?>]]>
+            </name>
+            <imgs>
+                <main url="<?= $product->getProfileImage() ?>"/>
+            </imgs>
+            <desc>
+                <![CDATA[<?= $product->getDescription() ?>]]>
+            </desc>
+            <attrs>
+                <a name="Kod_producenta">
+                    <![CDATA[<?= $block->getManufacturerCode($product) ?>]]>
+                </a>
+                <a name="Producent">
+                    <![CDATA[<?= $block->getManufacturer($product) ?>]]>
+                </a>
+                <a name="EAN">
+                    <![CDATA[<?= $block->getEan($product) ?>]]>
+                </a>
+                <?php if ($additionalAttributes): ?>
+                    <?php foreach ($additionalAttributes as $additionalAttributeKey => $additionalAttribute) : ?>
+                        <?php $attribute = $product->getData($additionalAttribute['code']); ?>
+                        <?php if ($attribute): ?>
+                            <?php if (isset($additionalAttribute['multiple']) && isset($additionalAttribute['attribute_id']) && !empty($additionalAttribute['multiple'])): ?>
+                                <a name="<?= $additionalAttribute['label'] ?>"><![CDATA[<?= $block->getOptionLabel($additionalAttribute['attribute_id'], $product->getData($additionalAttribute['code'])); ?>]]></a>
+                            <?php else: ?>
+                                <a name="<?= $additionalAttribute['label'] ?>"><![CDATA[<?= $product->getData($additionalAttribute['code']) ?>]]></a>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </attrs>
+        </o>
+    <?php endforeach; ?>
+</offers>

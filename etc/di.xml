@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+  ~ @copyright Copyright (c) 2019 Aurora Creation Sp. z o.o. (https://auroracreation.com)
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="ceneofeed_generation" xsi:type="object">Ceneo\Feed\Console\Command\FeedGenerationCommand</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="ceneofeed_feed_grid_datasource" xsi:type="string">Ceneo\Feed\Model\ResourceModel\Feed\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="ceneofeed_mapping_grid_datasource" xsi:type="string">Ceneo\Feed\Model\ResourceModel\FeedCategory\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

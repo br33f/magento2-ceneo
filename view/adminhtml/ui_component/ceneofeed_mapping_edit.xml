@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ @copyright Copyright (c) 2019 Aurora Creation Sp. z o.o. (https://auroracreation.com)
+  -->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">ceneofeed_mapping_edit.ceneofeed_mapping_form_datasource</item>
+            <item name="deps" xsi:type="string">ceneofeed_mapping_edit.ceneofeed_mapping_form_datasource</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">General</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">ceneofeed_mapping_edit</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="array">
+                <item name="name" xsi:type="string">back</item>
+                <item name="label" xsi:type="string" translate="true">Back</item>
+                <item name="class" xsi:type="string">back</item>
+                <item name="url" xsi:type="string">*/*/</item>
+            </item>
+            <item name="reset" xsi:type="string">Ceneo\Feed\Block\Adminhtml\Field\Edit\Button\Reset</item>
+            <item name="save" xsi:type="string">Ceneo\Feed\Block\Adminhtml\Field\Edit\Button\Save</item>
+            <item name="delete" xsi:type="string">Ceneo\Feed\Block\Adminhtml\Field\Edit\Button\Delete</item>
+            <item name="reset_ceneo_category_table" xsi:type="string">Ceneo\Feed\Block\Adminhtml\Field\Edit\Button\ResetCeneoData</item>
+
+        </item>
+    </argument>
+    <dataSource name="ceneofeed_mapping_form_datasource">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Ceneo\Feed\Ui\FeedCategoryFormDataProvider</argument>
+            <argument name="name" xsi:type="string">ceneofeed_mapping_form_datasource</argument>
+            <argument name="primaryFieldName" xsi:type="string">feed_category_id</argument>
+            <argument name="requestFieldName" xsi:type="string">feed_category_id</argument>
+            <argument name="collectionFactory" xsi:type="object">Ceneo\Feed\Model\ResourceModel\FeedCategory\CollectionFactory</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="*/*/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Feed configuration</item>
+            </item>
+        </argument>
+        <field name="code">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Code</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Name</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="exclude_categories">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Catalog\Ui\Component\Product\Form\Categories\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Exclude categories</item>
+                    <item name="componentType" xsi:type="string">field</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Catalog/js/components/new-category</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="dataScope" xsi:type="string">exclude_categories</item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="showCheckbox" xsi:type="boolean">false</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="multiple" xsi:type="boolean">true</item>
+                    <item name="levelsVisibility" xsi:type="number">1</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="listens" xsi:type="array">
+                        <item name="${ $.namespace }.${ $.namespace }:responseData" xsi:type="string">setParsed</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+
+    <fieldset name="mapped_categories_set">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Mapping Categories</item>
+                <item name="sortOrder" xsi:type="number">10</item>
+            </item>
+        </argument>
+
+        <container name="mapped_categories_container">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Ceneo_Feed/js/dynamic-rows/dynamic-rows</item>
+                    <item name="template" xsi:type="string">Ceneo_Feed/dynamic-rows/templates/default</item>
+                    <item name="componentType" xsi:type="string">dynamicRows</item>
+                    <item name="recordTemplate" xsi:type="string">record</item>
+                    <item name="deleteProperty" xsi:type="boolean">false</item>
+                    <item name="addButton" xsi:type="boolean">false</item>
+                    <item name="dndConfig" xsi:type="array">
+                        <item name="enabled" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+            </argument>
+            <container name="record">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Dynamic Rows</item>
+                        <item name="component" xsi:type="string" translate="true">Ceneo_Feed/js/dynamic-rows/record</item>
+                        <item name="isTemplate" xsi:type="boolean">true</item>
+                        <item name="is_collection" xsi:type="boolean">true</item>
+                        <item name="showFallbackReset" xsi:type="boolean">false</item>
+                    </item>
+                </argument>
+                <field name="feed_category_id">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="label" xsi:type="string" translate="true">Feed Category ID</item>
+                            <item name="visible" xsi:type="boolean">false</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="dataScope" xsi:type="string">feed_category_id</item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="category_id">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="label" xsi:type="string" translate="true">Category ID</item>
+                            <item name="visible" xsi:type="boolean">false</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="dataScope" xsi:type="string">category_id</item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="category_name">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="sortOrder" xsi:type="number">10</item>
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="template" xsi:type="string">ui/form/field</item>
+                            <item name="elementTmpl" xsi:type="string">Ceneo_Feed/form/element/input_text</item>
+                            <item name="label" translate="true" xsi:type="string">Category name</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="source" xsi:type="string">category_name</item>
+                            <item name="dataScope" xsi:type="string">category_name</item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="value">
+                    <argument name="data" xsi:type="array">
+                        <item name="options" xsi:type="object">Ceneo\Feed\Ui\Component\Feed\Form\Categories\Options</item>
+                        <item name="config" xsi:type="array">
+                            <item name="componentType" xsi:type="string">field</item>
+                            <item name="default" xsi:type="string">abc</item>
+                            <item name="label" xsi:type="string" translate="true">Mapping name</item>
+                            <item name="disableLabel" xsi:type="boolean">true</item>
+                            <item name="formElement" xsi:type="string">select</item>
+                            <item name="component" xsi:type="string">Magento_Catalog/js/components/new-category</item>
+                            <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                            <item name="dataScope" xsi:type="string">value</item>
+                            <item name="filterOptions" xsi:type="boolean">true</item>
+                            <item name="showCheckbox" xsi:type="boolean">false</item>
+                            <item name="multiple" xsi:type="boolean">false</item>
+                            <item name="levelsVisibility" xsi:type="number">1</item>
+                            <item name="sortOrder" xsi:type="number">100</item>
+                            <item name="listens" xsi:type="array">
+                                <item name="${ $.namespace }.${ $.namespace }:responseData" xsi:type="string">setParsed</item>
+                            </item>
+                        </item>
+                    </argument>
+                </field>
+                <field name="path">
+                    <argument name="data" xsi:type="array">
+                        <item name="options" xsi:type="object">Ceneo\Feed\Ui\Component\Feed\Form\Categories\Options</item>
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="label" xsi:type="string" translate="true">Mapped Category Path</item>
+                            <item name="visible" xsi:type="boolean">false</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="dataScope" xsi:type="string">path</item>
+                        </item>
+                    </argument>
+                </field>
+            </container>
+        </container>
+    </fieldset>
+</form>
